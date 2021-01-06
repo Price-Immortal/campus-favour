@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.campusfavour.mapper.UserMapper">
+    <sql id="fields">
+        id,
+        userName,
+        password,
+        createTime,
+        taskCount,
+        taskCountMonth,
+        releaseCount
+    </sql>
+
+    <select id="getUserByName" parameterType="String" resultType="com.campusfavour.entity.User">
+        select
+        <include refid="fields" />
+        from `user`
+        where userName = #{name}
+    </select>
+
+    <select id="selectTaskCountMonthRanking" resultType="com.campusfavour.entity.User">
+        select userName
+        from `user`
+        order by  taskCountMonth
+        Desc
+    </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.campusfavour.mapper.OrderMapper">
+    <sql id="fields">
+        id,
+        taskStatus,
+        releaseUserName,
+        releaseUserId,
+        releaseTime,
+        receiveUserName,
+        receiveUserId,
+        receiveTime,
+        orderType,
+        startPlace,
+        endPlace,
+        detail
+    </sql>
+
+    <select id="selectOrdersByParam" parameterType="java.util.Map" resultType="com.campusfavour.entity.Order">
+        select
+        *
+        from `order`
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="taskStatus != null">
+                AND taskStatus = #{taskStatus}
+            </if>
+            <if test="releaseUserName != null">
+                AND releaseUserName = #{releaseUserName}
+            </if>
+            <if test="releaseUserId != null">
+                AND releaseUserId = #{releaseUserId}
+            </if>
+            <if test="receiveUserName != null">
+                AND receiveUserName = #{receiveUserName}
+            </if>
+            <if test="receiveUserId != null">
+                AND receiveUserId = #{receiveUserId}
+            </if>
+            <if test="orderType != null">
+                AND orderType = #{orderType}
+            </if>
+        </where>
+    </select>
+
+</mapper>
