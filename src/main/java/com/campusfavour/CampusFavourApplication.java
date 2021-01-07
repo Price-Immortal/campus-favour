@@ -2,7 +2,9 @@ package com.campusfavour;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+/*
+* lisy的分支
+* */
 @SpringBootApplication
 public class CampusFavourApplication {
 
