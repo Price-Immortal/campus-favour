@@ -17,7 +17,7 @@ import java.util.Map;
 * */
 @RestController
 @RequestMapping("/order")
-public class OrderController {
+public class OrderController extends CommonController{
 
     @Autowired
     private OrderService orderService;
@@ -29,6 +29,7 @@ public class OrderController {
     @PostMapping("/selectOrdersByParam")
     @ResponseBody
     public Map selectOrdersByParam(Map map){
+        System.out.println("11111111111111111111111");
        return orderService.selectOrdersByParam(map);
     }
 }

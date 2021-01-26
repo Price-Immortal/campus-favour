@@ -1,7 +1,5 @@
 package com.campusfavour.controller;
 
-import com.campusfavour.entity.User;
-import com.campusfavour.service.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -9,18 +7,20 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /*
 * 登录控制器
 * */
-@Controller
+@RestController
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController{
 
-    @PostMapping("/login")
+    @Autowired
+    private ShiroService shiroService;
+
+    @GetMapping("/login")
     @ResponseBody
     public String login(String username,String password) {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {

@@ -21,6 +21,7 @@ public class OrderServiceImpl implements OrderService {
     public Map selectOrdersByParam(Map map) {
         HashMap<String, Object> returnMap = new HashMap<>();
         List<Order> orders = orderMapper.selectOrdersByParam(map);
+        returnMap.put("beans",orders);
         return returnMap;
 
     }

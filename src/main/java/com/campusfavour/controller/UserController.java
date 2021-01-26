@@ -10,7 +10,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends CommonController{
 
     @Autowired
     private UserService userService;
@@ -18,9 +18,11 @@ public class UserController {
     /*
     * 当月任务排行榜
     * */
-    @RequestMapping(value = "/selectTaskCountMonthRanking",method = RequestMethod.POST)
+    @GetMapping("/selectTaskCountMonthRanking")
     @ResponseBody
     public List<User> selectTaskCountMonthRanking(){
+        System.out.println("1111111111111");
+        System.out.println(userService.selectTaskCountMonthRanking());
         return userService.selectTaskCountMonthRanking();
     }
 }
