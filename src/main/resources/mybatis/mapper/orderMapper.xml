@@ -5,7 +5,7 @@
 <mapper namespace="com.campusfavour.mapper.OrderMapper">
     <sql id="fields">
         id,
-        taskStatus,
+        orderStatus,
         releaseUserName,
         releaseUserId,
         releaseTime,
@@ -20,7 +20,7 @@
 
     <select id="selectOrdersByParam" parameterType="java.util.Map" resultType="com.campusfavour.entity.Order">
         select
-        *
+        <include refid="fields"></include>
         from `order`
         <where>
             <if test="id != null">

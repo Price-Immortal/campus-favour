@@ -16,13 +16,21 @@ public class UserController extends CommonController{
     private UserService userService;
 
     /*
+     * 总任务排行榜
+     * */
+    @GetMapping("/selectTaskCountRanking")
+    @ResponseBody
+    public List<User> selectTaskCountRanking(){
+        return userService.selectTaskCountRanking();
+    }
+
+    /*
     * 当月任务排行榜
     * */
     @GetMapping("/selectTaskCountMonthRanking")
     @ResponseBody
     public List<User> selectTaskCountMonthRanking(){
-        System.out.println("1111111111111");
-        System.out.println(userService.selectTaskCountMonthRanking());
         return userService.selectTaskCountMonthRanking();
     }
+
 }

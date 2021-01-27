@@ -4,10 +4,7 @@ import com.campusfavour.service.OrderService;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,13 +20,12 @@ public class OrderController extends CommonController{
     private OrderService orderService;
 
     /*
-    * 查询发布中的所有订单
+    * 根据类型查询发布中的订单
     * */
     //TODO 按照时间排序
     @PostMapping("/selectOrdersByParam")
     @ResponseBody
-    public Map selectOrdersByParam(Map map){
-        System.out.println("11111111111111111111111");
+    public Map selectOrdersByParam(@RequestBody Map map){
        return orderService.selectOrdersByParam(map);
     }
 }
