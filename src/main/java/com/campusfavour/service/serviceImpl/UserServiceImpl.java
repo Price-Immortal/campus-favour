@@ -1,5 +1,6 @@
 package com.campusfavour.service.serviceImpl;
 
+import com.campusfavour.entity.Order;
 import com.campusfavour.entity.User;
 import com.campusfavour.mapper.UserMapper;
 import com.campusfavour.service.UserService;
@@ -18,13 +19,23 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<User> selectTaskCountRanking() {
-        return userMapper.selectTaskCountRanking();
+    public Map selectTaskCountRanking() {
+        HashMap<String, Object> returnMap = new HashMap<>();
+        List<User> userMaps = userMapper.selectTaskCountRanking();
+        returnMap.put("beans",userMaps);
+        returnMap.put("rtnCode","1");
+        returnMap.put("rtnMsg","selectTaskCountRanking查询成功");
+        return returnMap;
     }
 
     @Override
-    public List<User> selectTaskCountMonthRanking() {
-        return userMapper.selectTaskCountMonthRanking();
+    public Map selectTaskCountMonthRanking() {
+        HashMap<String, Object> returnMap = new HashMap<>();
+        List<User> userMaps = userMapper.selectTaskCountMonthRanking();
+        returnMap.put("beans",userMaps);
+        returnMap.put("rtnCode","1");
+        returnMap.put("rtnMsg","selectTaskCountMonthRanking查询成功");
+        return returnMap;
     }
 
     @Override
@@ -33,13 +44,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Map> selectUserIdList() {
-        return userMapper.selectUserIdList();
+    public Map selectUserIdList() {
+        HashMap<String, Object> returnMap = new HashMap<>();
+        List<Map> userMaps = userMapper.selectUserIdList();
+        returnMap.put("beans",userMaps);
+        returnMap.put("rtnCode","1");
+        returnMap.put("rtnMsg","selectUserIdList查询成功");
+        return returnMap;
     }
 
     @Override
     public void creditScoreTask() {
-        List<Map> users = selectUserIdList();
+        Map userMaps = selectUserIdList();
+        List<Map> users = (List<Map>) userMaps.get("beans");
         for (Map user : users) {
             if ( (int)user.get("creditScore") <= 80){
                 //正常添加的

@@ -5,9 +5,9 @@
 <mapper namespace="com.campusfavour.mapper.UserMapper">
     <sql id="fields">
         id,
-        userAccount,
-        password,
         userName,
+        password,
+        name,
         phone,
         stuNumber,
         createTime,
@@ -26,18 +26,18 @@
         select
         <include refid="fields" />
         from `user`
-        where userAccount = #{userAccount}
+        where userName = #{userName}
     </select>
 
     <select id="selectTaskCountRanking" resultType="com.campusfavour.entity.User">
-        select userAccount,taskCount
+        select userName,taskCount
         from `user`
         order by  taskCount
         Desc
     </select>
 
     <select id="selectTaskCountMonthRanking" resultType="com.campusfavour.entity.User">
-        select userAccount,taskCountMonth
+        select userName,taskCountMonth
         from `user`
         order by  taskCountMonth
         Desc

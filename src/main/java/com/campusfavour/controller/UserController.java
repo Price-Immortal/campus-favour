@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -20,7 +21,7 @@ public class UserController extends CommonController{
      * */
     @GetMapping("/selectTaskCountRanking")
     @ResponseBody
-    public List<User> selectTaskCountRanking(){
+    public Map selectTaskCountRanking(){
         return userService.selectTaskCountRanking();
     }
 
@@ -29,7 +30,7 @@ public class UserController extends CommonController{
     * */
     @GetMapping("/selectTaskCountMonthRanking")
     @ResponseBody
-    public List<User> selectTaskCountMonthRanking(){
+    public Map selectTaskCountMonthRanking(){
         return userService.selectTaskCountMonthRanking();
     }
 

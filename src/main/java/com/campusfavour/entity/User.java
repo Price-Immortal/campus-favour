@@ -9,11 +9,11 @@ public class User {
     //用户表主键
     String id;
     //用户名
-    String userAccount;
+    String userName;
     //密码
     String password;
     //姓名
-    String userName;
+    String name;
     //手机号
     String phone;
     //学号
@@ -101,12 +101,12 @@ public class User {
         this.creditScore = creditScore;
     }
 
-    public String getUserAccount() {
-        return userAccount;
+    public String getName() {
+        return name;
     }
 
-    public void setUserAccount(String userAccount) {
-        this.userAccount = userAccount;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStuNumber() {

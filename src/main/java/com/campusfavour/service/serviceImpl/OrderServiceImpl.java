@@ -21,6 +21,8 @@ public class OrderServiceImpl implements OrderService {
         HashMap<String, Object> returnMap = new HashMap<>();
         List<Order> orders = orderMapper.selectOrdersByParam(map);
         returnMap.put("beans",orders);
+        returnMap.put("rtnCode","1");
+        returnMap.put("rtnMsg","selectOrdersByParam查询成功");
         return returnMap;
 
     }
