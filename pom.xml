@@ -54,6 +54,16 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--jwt-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
         <!-- shiro -->
         <!--引入shiro-->
        <!-- <dependency>

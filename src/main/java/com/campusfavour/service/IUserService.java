@@ -5,7 +5,7 @@ import com.campusfavour.entity.User;
 import java.util.List;
 import java.util.Map;
 
-public interface UserService {
+public interface IUserService {
     //获取用户列表
     Map selectUserIdList();
     //总任务排行榜

@@ -5,6 +5,6 @@ import com.campusfavour.entity.Order;
 import java.util.List;
 import java.util.Map;
 
-public interface OrderService {
+public interface IOrderService {
     Map selectOrdersByParam(Map map);
 }

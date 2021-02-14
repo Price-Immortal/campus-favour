@@ -13,7 +13,7 @@ public interface UserMapper {
     //查询用户id列表
     List<Map> selectUserIdList();
     //登录-通过用户名查询用户信息
-    User getUserByUserAccount(String userAccount);
+    User getUserByUserName(String userName);
     //任务完成数总榜单列表查询
     List<User> selectTaskCountRanking();
     //任务完成数当月榜单列表查询

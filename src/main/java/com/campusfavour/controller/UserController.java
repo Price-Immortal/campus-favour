@@ -1,7 +1,7 @@
 package com.campusfavour.controller;
 
-import com.campusfavour.entity.User;
-import com.campusfavour.service.UserService;
+import com.campusfavour.annotation.LoginRequired;
+import com.campusfavour.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class UserController extends CommonController{
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     /*
      * 总任务排行榜
@@ -28,6 +28,7 @@ public class UserController extends CommonController{
     /*
     * 当月任务排行榜
     * */
+//    @LoginRequired
     @GetMapping("/selectTaskCountMonthRanking")
     @ResponseBody
     public Map selectTaskCountMonthRanking(){

@@ -1,6 +1,6 @@
 package com.campusfavour.controller;
 
-import com.campusfavour.service.OrderService;
+import com.campusfavour.service.IOrderService;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class OrderController extends CommonController{
 
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
 
     /*
     * 根据类型查询发布中的订单

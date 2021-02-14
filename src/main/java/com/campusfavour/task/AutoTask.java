@@ -1,6 +1,6 @@
 package com.campusfavour.task;
 
-import com.campusfavour.service.UserService;
+import com.campusfavour.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class AutoTask {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     /*
      *每月1号将用户上月完成任务总数清0

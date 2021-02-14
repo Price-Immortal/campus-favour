@@ -1,7 +1,7 @@
 package com.campusfavour.serviceTest;
 
-import com.campusfavour.service.OrderService;
-import com.campusfavour.service.UserService;
+import com.campusfavour.service.IOrderService;
+import com.campusfavour.service.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,9 +11,9 @@ import java.util.Map;
 public class ServiceTest {
 
     @Autowired
-    private  UserService userService;
+    private  IUserService userService;
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
 
     @Test
     public void testuser(){

@@ -22,7 +22,7 @@
         from user
     </select>
 
-    <select id="getUserByUserAccount" parameterType="String" resultType="com.campusfavour.entity.User">
+    <select id="getUserByUserName" parameterType="String" resultType="com.campusfavour.entity.User">
         select
         <include refid="fields" />
         from `user`
