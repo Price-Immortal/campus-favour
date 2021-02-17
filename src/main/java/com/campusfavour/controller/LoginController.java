@@ -1,50 +1,94 @@
 package com.campusfavour.controller;
 
+import com.campusfavour.annotation.CurrentUser;
+import com.campusfavour.annotation.LoginRequired;
 import com.campusfavour.entity.User;
-import com.campusfavour.service.LoginService;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.AuthorizationException;
-import org.apache.shiro.subject.Subject;
+import com.campusfavour.service.ILoginService;
+import com.campusfavour.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-/*
-* 登录控制器
-* */
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends CommonController {
 
-    @PostMapping("/login")
+    @Autowired
+    ILoginService iLoginService;
+
+    @GetMapping("/setCookie")
     @ResponseBody
-    public String login(String username,String password) {
-        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
-            return "请输入用户名和密码！";
+    public String setCookie(HttpServletResponse response){
+        Cookie cookie = new Cookie("test","same");
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return "success";
+    }
+
+    @GetMapping("/getCookie")
+    @ResponseBody
+    public String getCookie(HttpServletRequest request, HttpServletResponse response){
+        System.out.println("2222222222222222");
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length >0) {
+            for (Cookie cookie : cookies) {
+                System.out.println("name:" + cookie.getName() + "-----value:" + cookie.getValue());
+            }
         }
-        //用户认证信息
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-        try {
-            //进行验证，这里可以捕获异常，然后返回对应信息
-            subject.login(usernamePasswordToken);
-//            subject.checkRole("admin");
-//            subject.checkPermissions("query", "add");
-        } catch (UnknownAccountException e) {
-            System.out.println("用户名不存在！");
-            return "用户名不存在！";
-        } catch (AuthenticationException e) {
-            System.out.println("账号或密码错误");
-            return "账号或密码错误！";
-        } catch (AuthorizationException e) {
-            System.out.println("没有权限！！");
-            return "没有权限";
+        return "success";
+    }
+
+    @RequestMapping(value = "/getToken")
+    @ResponseBody
+    public void test(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        String token = (String)session.getAttribute("token");
+        System.out.println(token);
+    }
+
+    @RequestMapping(value = "/login")
+    @ResponseBody
+    public Map token(String userName, String password, String token, HttpServletRequest request) {
+
+        Map resultMap = new HashMap();
+
+        if (iLoginService.getUserByUserName(userName) == null) {
+            resultMap.put("rtnCode","0");
+            resultMap.put("rtnMsg","账号不存在");
+            return resultMap;
+        } else {
+            User result = null;
+
+            User u = new User();
+            u.setUserName(userName);
+            u.setPassword(password);
+            result = iLoginService.login(u);
+
+            if (result == null) {
+                resultMap.put("rtnCode","-1");
+                resultMap.put("rtnMsg","密码错误");
+                return resultMap;
+            } else {
+                //生成token
+                //String accessToken= TokenUtils.createJwtToken(userName);
+                String accessToken = userName;
+
+                HttpSession session = request.getSession();
+                session.setAttribute("token",accessToken);
+
+                resultMap.put("rtnCode","1");
+                resultMap.put("rtnMsg","登陆成功");
+                resultMap.put("token",accessToken);
+                return resultMap;
+            }
         }
-        System.out.println("login success");
-        return "login success";
     }
 }

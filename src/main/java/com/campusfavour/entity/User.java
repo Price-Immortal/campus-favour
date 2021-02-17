@@ -12,6 +12,12 @@ public class User {
     String userName;
     //密码
     String password;
+    //姓名
+    String name;
+    //手机号
+    String phone;
+    //学号
+    String stuNumber;
     //创建时间
     Date createTime;
     //总完成任务数 默认0
@@ -20,6 +26,8 @@ public class User {
     String taskCountMonth;
     //任务发布数量 默认0
     String releaseCount;
+    //信誉分，默认100
+    int creditScore;
 
     public String getId() {
         return id;
@@ -75,5 +83,37 @@ public class User {
 
     public void setReleaseCount(String releaseCount) {
         this.releaseCount = releaseCount;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getCreditScore() {
+        return creditScore;
+    }
+
+    public void setCreditScore(int creditScore) {
+        this.creditScore = creditScore;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStuNumber() {
+        return stuNumber;
+    }
+
+    public void setStuNumber(String stuNumber) {
+        this.stuNumber = stuNumber;
     }
 }

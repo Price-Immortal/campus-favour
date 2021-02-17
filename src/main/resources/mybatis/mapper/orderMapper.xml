@@ -5,7 +5,7 @@
 <mapper namespace="com.campusfavour.mapper.OrderMapper">
     <sql id="fields">
         id,
-        taskStatus,
+        orderStatus,
         releaseUserName,
         releaseUserId,
         releaseTime,
@@ -17,10 +17,20 @@
         endPlace,
         detail
     </sql>
+    <sql id="releaseOrder">
+        orderStatus,
+        releaseUserName,
+        releaseUserId,
+        releaseTime,
+        orderType,
+        startPlace,
+        endPlace,
+        detail
+    </sql>
 
     <select id="selectOrdersByParam" parameterType="java.util.Map" resultType="com.campusfavour.entity.Order">
         select
-        *
+        <include refid="fields"></include>
         from `order`
         <where>
             <if test="id != null">
@@ -47,4 +57,19 @@
         </where>
     </select>
 
+    <insert id="releaseOrder" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into `order`(
+           <include refid="releaseOrder"></include>
+       )
+       values(
+       #{orderStatus},
+       #{releaseUserName},
+       #{releaseUserId},
+       #{releaseTime},
+       #{orderType},
+       #{startPlace},
+       #{endPlace},
+       #{detail}
+        )
+    </insert>
 </mapper>

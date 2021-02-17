@@ -1,14 +1,13 @@
 package com.campusfavour.controller;
 
-import com.campusfavour.service.OrderService;
+import com.campusfavour.service.IOrderService;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,18 +16,27 @@ import java.util.Map;
 * */
 @RestController
 @RequestMapping("/order")
-public class OrderController {
+public class OrderController extends CommonController{
 
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
 
     /*
-    * 查询发布中的所有订单
+    * 根据类型查询发布中的订单
     * */
     //TODO 按照时间排序
     @PostMapping("/selectOrdersByParam")
     @ResponseBody
-    public Map selectOrdersByParam(Map map){
+    public Map selectOrdersByParam(@RequestBody Map map){
        return orderService.selectOrdersByParam(map);
+    }
+
+    /*
+     * 发布订单
+     * */
+    @PostMapping("/releaseOrder")
+    @ResponseBody
+    public Map releaseOrder(@RequestBody Map map){
+        return orderService.releaseOrder(map);
     }
 }

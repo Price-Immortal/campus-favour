@@ -7,23 +7,49 @@
         id,
         userName,
         password,
+        name,
+        phone,
+        stuNumber,
         createTime,
         taskCount,
         taskCountMonth,
-        releaseCount
+        releaseCount,
+        creditScore
     </sql>
 
-    <select id="getUserByName" parameterType="String" resultType="com.campusfavour.entity.User">
+    <select id="selectUserIdList" resultType="Map">
+        select id,creditScore
+        from user
+    </select>
+
+    <select id="getUserByUserName" parameterType="String" resultType="com.campusfavour.entity.User">
         select
         <include refid="fields" />
         from `user`
-        where userName = #{name}
+        where userName = #{userName}
+    </select>
+
+    <select id="selectTaskCountRanking" resultType="com.campusfavour.entity.User">
+        select userName,taskCount
+        from `user`
+        order by  taskCount
+        Desc
     </select>
 
     <select id="selectTaskCountMonthRanking" resultType="com.campusfavour.entity.User">
-        select userName
+        select userName,taskCountMonth
         from `user`
         order by  taskCountMonth
         Desc
     </select>
+
+    <update id="countMonthTask">
+        update `user`
+        set taskCountMonth = 0
+    </update>
+
+    <update id="creditScoreTask"  parameterType="Map">
+        update user set creditScore = #{creditScore}
+        where id = #{id}
+    </update>
 </mapper>

@@ -11,4 +11,6 @@ import java.util.Map;
 public interface OrderMapper {
     //查询发布中订单
     List<Order> selectOrdersByParam(Map map);
+    //发布订单
+    void releaseOrder(Map map);
 }

@@ -1,5 +1,6 @@
 package com.campusfavour.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
@@ -9,7 +10,7 @@ public class Order {
     //订单表主键
     String id;
     //订单状态 01:发布中/02:已接单/03:已取消/04:已完成
-    String taskStatus;
+    String orderStatus;
     //任务发布人
     String releaseUserName;
     //发布人id
@@ -103,12 +104,12 @@ public class Order {
         this.detail = detail;
     }
 
-    public String getTaskStatus() {
-        return taskStatus;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setTaskStatus(String taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public Date getReleaseTime() {
