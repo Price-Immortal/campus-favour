@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface IUserService {
     //获取用户列表
-    Map selectUserIdList();
+    List<Map> selectUserIdList();
     //总任务排行榜
     Map selectTaskCountMonthRanking();
     //当月任务排行榜

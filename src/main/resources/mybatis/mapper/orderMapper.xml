@@ -17,6 +17,16 @@
         endPlace,
         detail
     </sql>
+    <sql id="releaseOrder">
+        orderStatus,
+        releaseUserName,
+        releaseUserId,
+        releaseTime,
+        orderType,
+        startPlace,
+        endPlace,
+        detail
+    </sql>
 
     <select id="selectOrdersByParam" parameterType="java.util.Map" resultType="com.campusfavour.entity.Order">
         select
@@ -47,4 +57,19 @@
         </where>
     </select>
 
+    <insert id="releaseOrder" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into `order`(
+           <include refid="releaseOrder"></include>
+       )
+       values(
+       #{orderStatus},
+       #{releaseUserName},
+       #{releaseUserId},
+       #{releaseTime},
+       #{orderType},
+       #{startPlace},
+       #{endPlace},
+       #{detail}
+        )
+    </insert>
 </mapper>

@@ -44,20 +44,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Map selectUserIdList() {
-        HashMap<String, Object> returnMap = new HashMap<>();
-        List<Map> userMaps = userMapper.selectUserIdList();
-        returnMap.put("beans",userMaps);
-        returnMap.put("rtnCode","1");
-        returnMap.put("rtnMsg","selectUserIdList查询成功");
-        return returnMap;
+    public List<Map> selectUserIdList() {
+        return userMapper.selectUserIdList();
     }
 
     @Override
     public void creditScoreTask() {
-        Map userMaps = selectUserIdList();
-        List<Map> users = (List<Map>) userMaps.get("beans");
-        for (Map user : users) {
+        List<Map> userLists = selectUserIdList();
+        for (Map user : userLists) {
             if ( (int)user.get("creditScore") <= 80){
                 //正常添加的
                 user.put("creditScore",(int)user.get("creditScore")+20);

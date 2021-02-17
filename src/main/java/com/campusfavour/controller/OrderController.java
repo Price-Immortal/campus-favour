@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,5 +29,14 @@ public class OrderController extends CommonController{
     @ResponseBody
     public Map selectOrdersByParam(@RequestBody Map map){
        return orderService.selectOrdersByParam(map);
+    }
+
+    /*
+     * 发布订单
+     * */
+    @PostMapping("/releaseOrder")
+    @ResponseBody
+    public Map releaseOrder(@RequestBody Map map){
+        return orderService.releaseOrder(map);
     }
 }

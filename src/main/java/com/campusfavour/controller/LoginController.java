@@ -80,10 +80,12 @@ public class LoginController extends CommonController {
                 //生成token
                 //String accessToken= TokenUtils.createJwtToken(userName);
                 String accessToken = userName;
+
                 HttpSession session = request.getSession();
                 session.setAttribute("token",accessToken);
+
                 resultMap.put("rtnCode","1");
-                resultMap.put("rtnMsg","密码错误");
+                resultMap.put("rtnMsg","登陆成功");
                 resultMap.put("token",accessToken);
                 return resultMap;
             }
