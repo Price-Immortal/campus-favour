@@ -20,14 +20,14 @@ public class TokenUtils {
     /**
      * 生成token
      *
-     * @param id 一般传入userName
+     * @param userName 一般传入userName
      * @return
      */
-    public static String createJwtToken(String id) {
+    public static String createJwtToken(String userName) {
         String issuer = "www.xxxx.com";
         String subject = "xxxx@126.com";
         long ttlMillis = 3600000;
-        return createJwtToken(id, issuer, subject, ttlMillis);
+        return createJwtToken(userName, issuer, subject, ttlMillis);
     }
  
     /**
