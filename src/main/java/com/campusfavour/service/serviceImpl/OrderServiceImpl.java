@@ -6,6 +6,7 @@ import com.campusfavour.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,12 +36,6 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Map releaseOrder(Map map) {
         HashMap<String, Object> returnMap = new HashMap<>();
-
-        //任务发布人
-        map.put("releaseUserName","");
-        //任务发布人id
-        map.put("releaseUserId","");
-
         orderMapper.releaseOrder(map);
         returnMap.put("rtnCode","1");
         returnMap.put("rtnMsg","releaseOrder发布订单成功");

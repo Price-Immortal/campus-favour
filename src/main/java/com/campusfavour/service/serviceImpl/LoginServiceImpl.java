@@ -22,7 +22,7 @@ public class LoginServiceImpl implements ILoginService {
     public User login(User user) {
         User userData = userMapper.getUserByUserName(user.getUserName());
         if ( userData.getPassword().equals(user.getPassword()) ){
-            return user;
+            return userData;
         }else{
             return null;
         }

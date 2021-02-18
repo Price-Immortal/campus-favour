@@ -7,10 +7,7 @@ import com.campusfavour.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -64,4 +61,9 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    @Override
+    public void registerUser(Map map) {
+        map.put("createTime",new Date());
+        userMapper.registerUser(map);
+    }
 }

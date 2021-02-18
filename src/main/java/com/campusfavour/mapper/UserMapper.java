@@ -22,4 +22,6 @@ public interface UserMapper {
     void countMonthTask();
     //定时任务-每月增加用户信誉分20分
     void creditScoreTask(Map users);
+    //注册
+    void registerUser(Map map);
 }

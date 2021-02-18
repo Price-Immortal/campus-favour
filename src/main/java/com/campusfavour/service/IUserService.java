@@ -16,4 +16,6 @@ public interface IUserService {
     void countMonthTask();
     //定时任务-每月增加用户信誉分20分
     void creditScoreTask();
+    //注册
+    void registerUser(Map map);
 }

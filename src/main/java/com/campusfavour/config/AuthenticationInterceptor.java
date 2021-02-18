@@ -39,13 +39,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         // 有 @LoginRequired 注解，需要认证
         if (methodAnnotation != null) {
             // 判断是否存在令牌信息，如果存在，则允许登录
-            String accessToken = request.getHeader("Authorization");
- 
- 
-            if (null == accessToken) {
-                throw new Exception("无token，请重新登录");
+                String accessToken = request.getHeader("Authorization");
+
+            if ("undefined".equals(accessToken)) {
+               throw new Exception("无token，请重新登录");
             } else {
-                // 从Redis 中查看 token 是否过期
                 Claims claims;
                 try{
                      claims = TokenUtils.parseJWT(accessToken);
@@ -64,7 +62,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     throw new Exception("用户不存在，请重新登录");
                 }
                 // 当前登录用户@CurrentUser
-                request.setAttribute(CurrentUserConstants.CURRENT_USER, user);
+                //request.setAttribute(CurrentUserConstants.CURRENT_USER, user);
                 return true;
             }
  

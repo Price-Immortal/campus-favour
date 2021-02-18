@@ -2,6 +2,7 @@ package com.campusfavour.controller;
 
 import com.campusfavour.annotation.CurrentUser;
 import com.campusfavour.annotation.LoginRequired;
+import com.campusfavour.constants.CurrentUserConstants;
 import com.campusfavour.entity.User;
 import com.campusfavour.service.ILoginService;
 import com.campusfavour.utils.TokenUtils;
@@ -45,18 +46,18 @@ public class LoginController extends CommonController {
         return "success";
     }
 
-    @RequestMapping(value = "/getToken")
+   /* @RequestMapping(value = "/getToken")
     @ResponseBody
     public void test(HttpServletRequest request)
     {
         HttpSession session = request.getSession();
         String token = (String)session.getAttribute("token");
         System.out.println(token);
-    }
+    }*/
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Map token(String userName, String password, String token, HttpServletRequest request) {
+    public Map token(String userName, String password, HttpServletRequest request) {
 
         Map resultMap = new HashMap();
 
@@ -78,15 +79,17 @@ public class LoginController extends CommonController {
                 return resultMap;
             } else {
                 //生成token
-                //String accessToken= TokenUtils.createJwtToken(userName);
-                String accessToken = userName;
+                String accessToken= TokenUtils.createJwtToken(userName);
 
                 HttpSession session = request.getSession();
-                session.setAttribute("token",accessToken);
+                session.setAttribute(userName,accessToken);
 
                 resultMap.put("rtnCode","1");
                 resultMap.put("rtnMsg","登陆成功");
                 resultMap.put("token",accessToken);
+
+                // 当前登录用户@CurrentUser
+                request.setAttribute(CurrentUserConstants.CURRENT_USER, result);
                 return resultMap;
             }
         }

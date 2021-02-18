@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +38,13 @@ public class OrderController extends CommonController{
      * */
     @PostMapping("/releaseOrder")
     @ResponseBody
-    public Map releaseOrder(@RequestBody Map map){
+    public Map releaseOrder(@RequestBody Map map, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.getAttribute("");
+        //任务发布人
+        map.put("releaseUserName","");
+        //任务发布人id
+        map.put("releaseUserId","");
         return orderService.releaseOrder(map);
     }
 }

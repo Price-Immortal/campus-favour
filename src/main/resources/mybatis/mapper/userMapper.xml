@@ -16,6 +16,14 @@
         releaseCount,
         creditScore
     </sql>
+    <sql id="registerUser">
+        userName,
+        password,
+        name,
+        phone,
+        stuNumber,
+        createTime
+    </sql>
 
     <select id="selectUserIdList" resultType="Map">
         select id,creditScore
@@ -52,4 +60,18 @@
         update user set creditScore = #{creditScore}
         where id = #{id}
     </update>
+
+    <insert id="registerUser">
+        insert into `user`(
+        <include refid="registerUser"></include>
+        )
+        values (
+        #{userName},
+        #{password},
+        #{name},
+        #{phone},
+        #{stuNumber},
+        #{createTime}
+        )
+    </insert>
 </mapper>
