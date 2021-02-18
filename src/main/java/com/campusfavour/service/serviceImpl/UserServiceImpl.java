@@ -62,8 +62,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void registerUser(Map map) {
+    public Map registerUser(Map map) {
+        HashMap<Object, Object> resultMap = new HashMap<>();
         map.put("createTime",new Date());
         userMapper.registerUser(map);
+        resultMap.put("rtnCode","1");
+        resultMap.put("rtnMsg","注册成功");
+        return resultMap;
     }
 }

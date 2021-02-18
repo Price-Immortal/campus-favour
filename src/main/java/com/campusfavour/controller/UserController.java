@@ -43,8 +43,8 @@ public class UserController extends CommonController{
     * */
     @PostMapping("/registerUser")
     @ResponseBody
-    public void registerUser(@RequestBody Map map){
-        userService.registerUser(map);
+    public Map registerUser(@RequestBody Map map){
+        return userService.registerUser(map);
     }
 
     @GetMapping("/getUser")

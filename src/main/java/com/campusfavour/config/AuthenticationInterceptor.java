@@ -9,6 +9,7 @@ import com.campusfavour.utils.TokenUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
+import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,8 +41,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         if (methodAnnotation != null) {
             // 判断是否存在令牌信息，如果存在，则允许登录
                 String accessToken = request.getHeader("Authorization");
-
-            if ("undefined".equals(accessToken)) {
+            if ("undefined".equals(accessToken) || accessToken == null) {
                throw new Exception("无token，请重新登录");
             } else {
                 Claims claims;
