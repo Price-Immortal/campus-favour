@@ -11,6 +11,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
+
 /**
  *  
  * @BelongsPackage: com.jdtaste.jdtastesso.web.intercepter.auth
@@ -31,7 +32,7 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
         return parameter.getParameterType().isAssignableFrom(User.class)//判断是否能转成UserBase 类型
                 && parameter.hasParameterAnnotation(CurrentUser.class);//是否有CurrentUser注解
     }
- 
+
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {

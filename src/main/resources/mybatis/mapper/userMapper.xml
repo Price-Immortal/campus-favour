@@ -25,16 +25,51 @@
         createTime
     </sql>
 
-    <select id="selectUserIdList" resultType="Map">
-        select id,creditScore
+    <select id="selectUserList" resultType="Map">
+        select
+        <include refid="fields"></include>
         from user
     </select>
 
-    <select id="getUserByUserName" parameterType="String" resultType="com.campusfavour.entity.User">
+    <select id="getUserByParam" parameterType="Map" resultType="com.campusfavour.entity.User">
         select
         <include refid="fields" />
         from `user`
-        where userName = #{userName}
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="userName != null">
+                AND userName = #{userName}
+            </if>
+            <if test="password != null">
+                AND password = #{password}
+            </if>
+            <if test="name != null">
+                AND name = #{name}
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+            <if test="stuNumber != null">
+                AND stuNumber = #{stuNumber}
+            </if>
+            <if test="createTime != null">
+                AND createTime = #{createTime}
+            </if>
+            <if test="taskCount != null">
+                AND taskCount = #{taskCount}
+            </if>
+            <if test="taskCountMonth != null">
+                AND taskCountMonth = #{taskCountMonth}
+            </if>
+            <if test="releaseCount != null">
+                AND releaseCount = #{releaseCount}
+            </if>
+            <if test="creditScore != null">
+                AND creditScore = #{creditScore}
+            </if>
+        </where>
     </select>
 
     <select id="selectTaskCountRanking" resultType="com.campusfavour.entity.User">

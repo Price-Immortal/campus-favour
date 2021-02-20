@@ -42,7 +42,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<Map> selectUserIdList() {
-        return userMapper.selectUserIdList();
+        return userMapper.selectUserList();
     }
 
     @Override

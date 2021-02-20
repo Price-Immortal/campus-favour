@@ -10,10 +10,10 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface UserMapper {
-    //查询用户id列表
-    List<Map> selectUserIdList();
-    //登录-通过用户名查询用户信息
-    User getUserByUserName(String userName);
+    //查询用户列表
+    List<Map> selectUserList();
+    //登录-通过参数查询用户信息
+    User getUserByParam(Map paramMap);
     //任务完成数总榜单列表查询
     List<User> selectTaskCountRanking();
     //任务完成数当月榜单列表查询

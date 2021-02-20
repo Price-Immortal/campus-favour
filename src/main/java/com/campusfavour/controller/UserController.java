@@ -1,5 +1,6 @@
 package com.campusfavour.controller;
 
+import com.campusfavour.annotation.CurrentUser;
 import com.campusfavour.annotation.LoginRequired;
 import com.campusfavour.constants.CurrentUserConstants;
 import com.campusfavour.entity.User;
@@ -47,12 +48,5 @@ public class UserController extends CommonController{
         return userService.registerUser(map);
     }
 
-    @GetMapping("/getUser")
-    @ResponseBody
-    public User getUser(HttpServletRequest request){
-        User user = (User)request.getAttribute(CurrentUserConstants.CURRENT_USER);
-        System.out.println(user.getUserName());
-        return user;
-    }
 
 }

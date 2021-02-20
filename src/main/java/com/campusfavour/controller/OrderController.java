@@ -1,5 +1,8 @@
 package com.campusfavour.controller;
 
+import com.campusfavour.annotation.CurrentUser;
+import com.campusfavour.annotation.LoginRequired;
+import com.campusfavour.entity.User;
 import com.campusfavour.service.IOrderService;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +39,17 @@ public class OrderController extends CommonController{
     /*
      * 发布订单
      * */
+    @LoginRequired
     @PostMapping("/releaseOrder")
     @ResponseBody
-    public Map releaseOrder(@RequestBody Map map, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        session.getAttribute("");
+    public Map releaseOrder(@RequestBody Map map, HttpServletRequest request, @CurrentUser User user){
         //任务发布人
-        map.put("releaseUserName","");
+        map.put("releaseUserName",user.getUserName());
         //任务发布人id
-        map.put("releaseUserId","");
+        map.put("releaseUserId",user.getId());
+        //任务发布时间
+        map.put("releaseTime",new Date());
+
         return orderService.releaseOrder(map);
     }
 }

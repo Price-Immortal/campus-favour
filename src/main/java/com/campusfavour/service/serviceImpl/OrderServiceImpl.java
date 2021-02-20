@@ -1,7 +1,9 @@
 package com.campusfavour.service.serviceImpl;
 
 import com.campusfavour.entity.Order;
+import com.campusfavour.entity.User;
 import com.campusfavour.mapper.OrderMapper;
+import com.campusfavour.mapper.UserMapper;
 import com.campusfavour.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ public class OrderServiceImpl implements IOrderService {
 
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /*
     * 根据类型查询发布中的订单
@@ -36,9 +40,21 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Map releaseOrder(Map map) {
         HashMap<String, Object> returnMap = new HashMap<>();
-        orderMapper.releaseOrder(map);
-        returnMap.put("rtnCode","1");
-        returnMap.put("rtnMsg","releaseOrder发布订单成功");
-        return returnMap;
+        //判断用户是否可以发布任务,信誉分80分以下不能发布任务
+        String releaseUserId = (String)map.get("releaseUserId");
+        Map paramMap = new HashMap();
+        paramMap.put("id",releaseUserId);
+        User user = userMapper.getUserByParam(paramMap);
+
+        if ( user.getCreditScore() >= 80){
+            orderMapper.releaseOrder(map);
+            returnMap.put("rtnCode","1");
+            returnMap.put("rtnMsg","releaseOrder发布任务成功");
+            return returnMap;
+        }else{
+            returnMap.put("rtnCode","-1");
+            returnMap.put("rtnMsg","信誉分不足80，无法发布任务");
+            return returnMap;
+        }
     }
 }

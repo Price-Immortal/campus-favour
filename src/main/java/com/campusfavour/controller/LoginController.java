@@ -1,8 +1,5 @@
 package com.campusfavour.controller;
 
-import com.campusfavour.annotation.CurrentUser;
-import com.campusfavour.annotation.LoginRequired;
-import com.campusfavour.constants.CurrentUserConstants;
 import com.campusfavour.entity.User;
 import com.campusfavour.service.ILoginService;
 import com.campusfavour.utils.TokenUtils;
@@ -22,9 +19,11 @@ import java.util.Map;
 public class LoginController extends CommonController {
 
     @Autowired
+    HttpServletRequest request;
+    @Autowired
     ILoginService iLoginService;
 
-    @GetMapping("/setCookie")
+    /*@GetMapping("/setCookie")
     @ResponseBody
     public String setCookie(HttpServletResponse response){
         Cookie cookie = new Cookie("test","same");
@@ -43,24 +42,18 @@ public class LoginController extends CommonController {
             }
         }
         return "success";
-    }
-
-   /* @RequestMapping(value = "/getToken")
-    @ResponseBody
-    public void test(HttpServletRequest request)
-    {
-        HttpSession session = request.getSession();
-        String token = (String)session.getAttribute("token");
-        System.out.println(token);
     }*/
+
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Map token(String userName, String password, HttpServletRequest request) {
+    public Map token(String userName, String password) {
 
         Map resultMap = new HashMap();
 
-        if (iLoginService.getUserByUserName(userName) == null) {
+        Map paramMap = new HashMap();
+        paramMap.put("userName",userName);
+        if (iLoginService.getUserByParam(paramMap) == null) {
             resultMap.put("rtnCode","0");
             resultMap.put("rtnMsg","账号不存在");
             return resultMap;
@@ -88,7 +81,7 @@ public class LoginController extends CommonController {
                 resultMap.put("token",accessToken);
 
                 // 当前登录用户@CurrentUser
-                request.setAttribute(CurrentUserConstants.CURRENT_USER, result);
+//                request.getSession().setAttribute(CurrentUserConstants.CURRENT_USER, result);
                 return resultMap;
             }
         }
