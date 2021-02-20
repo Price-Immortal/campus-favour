@@ -83,7 +83,7 @@
         id = #{id}
     </update>
 
-    <select id="userRelease" parameterType="Map" resultType="com.campusfavour.entity.Order">
+    <select id="usersOrders" parameterType="Map" resultType="com.campusfavour.entity.Order">
         select
         <include refid="fields"></include>
         from `order`

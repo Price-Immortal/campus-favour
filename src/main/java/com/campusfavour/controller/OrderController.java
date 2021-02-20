@@ -71,6 +71,17 @@ public class OrderController extends CommonController{
     @ResponseBody
     public Map userRelease(@RequestBody Map map,@CurrentUser User user){
         map.put("releaseUserName",user.getUserName());
-        return orderService.userRelease(map);
+        return orderService.usersOrders(map);
+    }
+
+    /*
+    * 我的接单
+    * */
+    @LoginRequired
+    @PostMapping("/userReceive")
+    @ResponseBody
+    public Map userReceive(@RequestBody Map map,@CurrentUser User user){
+        map.put("receiveUserName",user.getUserName());
+        return orderService.usersOrders(map);
     }
 }

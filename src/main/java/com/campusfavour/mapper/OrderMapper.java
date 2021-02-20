@@ -15,6 +15,6 @@ public interface OrderMapper {
     void releaseOrder(Map map);
     //接受任务
     void acceptOrder(Map map);
-    //我的发单
-    List<Order> userRelease(Map map);
+    //我的发单/我的接单
+    List<Order> usersOrders(Map map);
 }

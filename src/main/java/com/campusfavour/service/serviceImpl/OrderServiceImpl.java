@@ -82,12 +82,12 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     /*
-    * 我的发单
+    * 我的发单/我的接单
     * */
     @Override
-    public Map userRelease(Map map) {
+    public Map usersOrders(Map map) {
         Map returnMap = new HashMap();
-        List<Order> orders = orderMapper.userRelease(map);
+        List<Order> orders = orderMapper.usersOrders(map);
         returnMap.put("beans",orders);
         returnMap.put("rtnCode","1");
         returnMap.put("rtnMsg","userRelease查询成功");
