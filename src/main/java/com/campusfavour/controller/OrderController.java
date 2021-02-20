@@ -27,7 +27,7 @@ public class OrderController extends CommonController{
     private IOrderService orderService;
 
     /*
-    * 根据类型查询发布中的订单
+    * 根据类型查询发布中的任务
     * */
     //TODO 按照时间排序
     @PostMapping("/selectOrdersByParam")
@@ -37,12 +37,12 @@ public class OrderController extends CommonController{
     }
 
     /*
-     * 发布订单
+     * 发布任务
      * */
     @LoginRequired
     @PostMapping("/releaseOrder")
     @ResponseBody
-    public Map releaseOrder(@RequestBody Map map, HttpServletRequest request, @CurrentUser User user){
+    public Map releaseOrder(@RequestBody Map map, @CurrentUser User user){
         //任务发布人
         map.put("releaseUserName",user.getUserName());
         //任务发布人id
@@ -51,5 +51,23 @@ public class OrderController extends CommonController{
         map.put("releaseTime",new Date());
 
         return orderService.releaseOrder(map);
+    }
+
+    /*
+    *接受任务
+    * */
+    @LoginRequired
+    @PostMapping("/releaseOrder")
+    @ResponseBody
+    public Map acceptOrder(@RequestBody Map map,@CurrentUser User user){
+        Map returnMap = new HashMap();
+        //任务接单人
+        map.put("receiveUserName",user.getUserName());
+        //任务接单人id
+        map.put("receiveUserId",user.getId());
+        //任务接单时间
+        map.put("receiveTime",new Date());
+        orderService.acceptOrder(map);
+        return returnMap;
     }
 }

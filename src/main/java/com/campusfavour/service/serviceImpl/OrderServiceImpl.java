@@ -57,4 +57,27 @@ public class OrderServiceImpl implements IOrderService {
             return returnMap;
         }
     }
+
+    /*
+    * 接受任务
+    * */
+    @Override
+    public Map acceptOrder(Map map) {
+        Map returnMap = new HashMap();
+        //判断用户是否可以接受任务,信誉分60分以下不能接受任务
+        String receiveUserId = (String)map.get("receiveUserId");
+        Map paramMap = new HashMap();
+        paramMap.put("id",receiveUserId);
+        User user = userMapper.getUserByParam(paramMap);
+        if ( user.getCreditScore() >= 60){
+            orderMapper.acceptOrder(map);
+            returnMap.put("rtnCode","1");
+            returnMap.put("rtnMsg","acceptOrder接受任务成功");
+            return returnMap;
+        }else{
+            returnMap.put("rtnCode","-1");
+            returnMap.put("rtnMsg","信誉分不足60，无法接受任务");
+            return returnMap;
+        }
+    }
 }

@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface IOrderService {
-    //根据类型查询发布中的订单
+    //根据类型查询发布中的任务
     Map selectOrdersByParam(Map map);
-    //发布订单
+    //发布任务
     Map releaseOrder(Map map);
+    //接受任务
+    Map acceptOrder(Map map);
 }

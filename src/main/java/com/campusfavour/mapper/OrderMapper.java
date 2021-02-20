@@ -9,8 +9,10 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface OrderMapper {
-    //查询发布中订单
+    //查询发布中任务
     List<Order> selectOrdersByParam(Map map);
-    //发布订单
+    //发布任务
     void releaseOrder(Map map);
+    //接受任务
+    void acceptOrder(Map map);
 }

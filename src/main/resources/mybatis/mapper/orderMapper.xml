@@ -72,4 +72,14 @@
        #{detail}
         )
     </insert>
+
+    <update id="acceptOrder" parameterType="Map">
+        update `order`
+        set
+        receiveUserName = #{receiveUserName},
+        receiveUserId = #{receiveUserId},
+        receiveTime = #{receiveTime}
+        where
+        id = #{id}
+    </update>
 </mapper>
