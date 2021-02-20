@@ -7,7 +7,7 @@ import java.util.Date;
 * */
 public class User {
     //用户表主键
-    String id;
+    String userId;
     //用户名
     String userName;
     //密码
@@ -29,12 +29,12 @@ public class User {
     //信誉分，默认100
     int creditScore;
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

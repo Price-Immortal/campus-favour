@@ -8,7 +8,7 @@ import java.util.Date;
 * */
 public class Order {
     //订单表主键
-    String id;
+    String orderId;
     //订单状态 01:发布中/02:已接单/03:已取消/04:已完成
     String orderStatus;
     //任务发布人
@@ -32,12 +32,12 @@ public class Order {
     //任务详情 带什么饭/快递名称/跑腿物品
     String detail;
 
-    public String getId() {
-        return id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getReleaseUserName() {

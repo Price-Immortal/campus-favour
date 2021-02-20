@@ -39,7 +39,7 @@ public class OrderController extends CommonController{
         //任务发布人
         map.put("releaseUserName",user.getUserName());
         //任务发布人id
-        map.put("releaseUserId",user.getId());
+        map.put("releaseUserId",user.getUserId());
         //任务发布时间
         map.put("releaseTime",new Date());
 
@@ -61,13 +61,13 @@ public class OrderController extends CommonController{
     *接受任务
     * */
     @LoginRequired
-    @PostMapping("/releaseOrder")
+    @PostMapping("/acceptOrder")
     @ResponseBody
     public Map acceptOrder(@RequestBody Map map,@CurrentUser User user){
         //任务接单人
         map.put("receiveUserName",user.getUserName());
         //任务接单人id
-        map.put("receiveUserId",user.getId());
+        map.put("receiveUserId",user.getUserId());
         //任务接单时间
         map.put("receiveTime",new Date());
 
@@ -94,5 +94,16 @@ public class OrderController extends CommonController{
     public Map userReceive(@RequestBody Map map,@CurrentUser User user){
         map.put("receiveUserName",user.getUserName());
         return orderService.usersOrders(map);
+    }
+
+    /*
+    * 完成任务
+    * */
+    @LoginRequired
+    @PostMapping("/completeOrder")
+    @ResponseBody
+    public Map completeOrder(@RequestBody Map map,@CurrentUser User user){
+        map.put("userId",user.getUserId());
+        return orderService.completeOrder(map);
     }
 }

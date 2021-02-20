@@ -17,4 +17,6 @@ public interface IOrderService {
     Map acceptOrder(Map map);
     //我的发单/我的接单
     Map usersOrders(Map map);
+    //完成任务
+    Map completeOrder(Map map);
 }

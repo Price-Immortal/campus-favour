@@ -43,7 +43,7 @@ public class OrderServiceImpl implements IOrderService {
         //判断用户是否可以发布任务,信誉分80分以下不能发布任务
         String releaseUserId = (String)map.get("releaseUserId");
         Map paramMap = new HashMap();
-        paramMap.put("id",releaseUserId);
+        paramMap.put("userId",releaseUserId);
         User user = userMapper.getUserByParam(paramMap);
 
         if ( user.getCreditScore() >= 80){
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements IOrderService {
         //判断用户是否可以接受任务,信誉分60分以下不能接受任务
         String receiveUserId = (String)map.get("receiveUserId");
         Map paramMap = new HashMap();
-        paramMap.put("id",receiveUserId);
+        paramMap.put("userId",receiveUserId);
         User user = userMapper.getUserByParam(paramMap);
         if ( user.getCreditScore() >= 60){
             orderMapper.acceptOrder(map);
@@ -101,5 +101,30 @@ public class OrderServiceImpl implements IOrderService {
         returnMap.put("rtnCode","1");
         returnMap.put("rtnMsg","userRelease查询成功");
         return returnMap;
+    }
+
+    /*
+    * 完成任务
+    * */
+    @Override
+    public Map completeOrder(Map map) {
+        //用户当月、总完成任务数加1
+        userMapper.monthNumAdd(map);
+        userMapper.totalNumAdd(map);
+        //任务状态变更05
+        map.put("orderStatus","05");
+        orderMapper.updateOrder(map);
+        //用户信誉分加5
+        User user = userMapper.getUserByParam(map);
+        Map paramMap = new HashMap();
+        paramMap.put("userId",user.getUserId());
+        if ( user.getCreditScore() <= 95 ){
+            paramMap.put("creditScore",user.getCreditScore()+5);
+            userMapper.updateUserById(paramMap);
+        }else{
+            paramMap.put("creditScore",100);
+            userMapper.updateUserById(paramMap);
+        }
+        return null;
     }
 }

@@ -18,10 +18,15 @@ public interface UserMapper {
     List<User> selectTaskCountRanking();
     //任务完成数当月榜单列表查询
     List<User> selectTaskCountMonthRanking();
+    void updateUserById(Map map);
     //定时任务-每月刷新用户月任务完成数
     void countMonthTask();
     //定时任务-每月增加用户信誉分20分
     void creditScoreTask(Map users);
     //注册
     void registerUser(Map map);
+    //月完成数加1
+    void monthNumAdd(Map map);
+    //总完成数加1
+    void totalNumAdd(Map map);
 }
