@@ -4,16 +4,9 @@ import com.campusfavour.annotation.CurrentUser;
 import com.campusfavour.annotation.LoginRequired;
 import com.campusfavour.entity.User;
 import com.campusfavour.service.IOrderService;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /*
@@ -60,14 +53,24 @@ public class OrderController extends CommonController{
     @PostMapping("/releaseOrder")
     @ResponseBody
     public Map acceptOrder(@RequestBody Map map,@CurrentUser User user){
-        Map returnMap = new HashMap();
         //任务接单人
         map.put("receiveUserName",user.getUserName());
         //任务接单人id
         map.put("receiveUserId",user.getId());
         //任务接单时间
         map.put("receiveTime",new Date());
-        orderService.acceptOrder(map);
-        return returnMap;
+
+        return  orderService.acceptOrder(map);
+    }
+
+    /*
+    * 我的发单
+    * */
+    @LoginRequired
+    @PostMapping("/userRelease")
+    @ResponseBody
+    public Map userRelease(@RequestBody Map map,@CurrentUser User user){
+        map.put("releaseUserName",user.getUserName());
+        return orderService.userRelease(map);
     }
 }

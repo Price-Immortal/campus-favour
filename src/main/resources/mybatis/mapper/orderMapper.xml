@@ -82,4 +82,33 @@
         where
         id = #{id}
     </update>
+
+    <select id="userRelease" parameterType="Map" resultType="com.campusfavour.entity.Order">
+        select
+        <include refid="fields"></include>
+        from `order`
+        <where>
+            <if test="id != null and id != ''">
+                AND id = #{id}
+            </if>
+            <if test="taskStatus != null and taskStatus != ''">
+                AND taskStatus = #{taskStatus}
+            </if>
+            <if test="releaseUserName != null and releaseUserName != ''">
+                AND releaseUserName = #{releaseUserName}
+            </if>
+            <if test="releaseUserId != null and releaseUserId != ''">
+                AND releaseUserId = #{releaseUserId}
+            </if>
+            <if test="receiveUserName != null and receiveUserName != ''">
+                AND receiveUserName = #{receiveUserName}
+            </if>
+            <if test="receiveUserId != null and receiveUserId != ''">
+                AND receiveUserId = #{receiveUserId}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                AND orderType = #{orderType}
+            </if>
+        </where>
+    </select>
 </mapper>

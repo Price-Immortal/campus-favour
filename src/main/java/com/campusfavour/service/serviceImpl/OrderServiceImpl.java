@@ -80,4 +80,17 @@ public class OrderServiceImpl implements IOrderService {
             return returnMap;
         }
     }
+
+    /*
+    * 我的发单
+    * */
+    @Override
+    public Map userRelease(Map map) {
+        Map returnMap = new HashMap();
+        List<Order> orders = orderMapper.userRelease(map);
+        returnMap.put("beans",orders);
+        returnMap.put("rtnCode","1");
+        returnMap.put("rtnMsg","userRelease查询成功");
+        return returnMap;
+    }
 }
