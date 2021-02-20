@@ -11,6 +11,8 @@ public interface IOrderService {
     Map selectOrdersByParam(Map map);
     //发布任务
     Map releaseOrder(Map map);
+    //修改任务
+    Map updateOrder(Map map);
     //接受任务
     Map acceptOrder(Map map);
     //我的发单/我的接单

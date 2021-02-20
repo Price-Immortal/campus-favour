@@ -13,6 +13,8 @@ public interface OrderMapper {
     List<Order> selectOrdersByParam(Map map);
     //发布任务
     void releaseOrder(Map map);
+    //更新任务
+    void updateOrder(Map map);
     //接受任务
     void acceptOrder(Map map);
     //我的发单/我的接单

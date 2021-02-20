@@ -47,6 +47,17 @@ public class OrderController extends CommonController{
     }
 
     /*
+    * 修改任务
+    * */
+    @LoginRequired
+    @PostMapping("/updateOrder")
+    @ResponseBody
+    public Map updateOrder(@RequestBody Map map, @CurrentUser User user){
+
+        return orderService.updateOrder(map);
+    }
+
+    /*
     *接受任务
     * */
     @LoginRequired

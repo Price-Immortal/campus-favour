@@ -73,6 +73,25 @@
         )
     </insert>
 
+    <update id="updateOrder" parameterType="Map">
+        update `order`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="orderStatus!=null and orderStatus!=''">
+                orderStatus=#{orderStatus},
+            </if>
+            <if test="startPlace!=null and startPlace!=''">
+                startPlace=#{startPlace},
+            </if>
+            <if test="endPlace!=null and endPlace!=''">
+                endPlace=#{endPlace},
+            </if>
+            <if test="detail!=null and detail!=''">
+                detail=#{detail},
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
     <update id="acceptOrder" parameterType="Map">
         update `order`
         set

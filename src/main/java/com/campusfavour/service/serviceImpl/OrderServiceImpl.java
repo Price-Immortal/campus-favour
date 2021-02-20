@@ -58,6 +58,15 @@ public class OrderServiceImpl implements IOrderService {
         }
     }
 
+    @Override
+    public Map updateOrder(Map map) {
+        Map returnMap = new HashMap();
+        orderMapper.updateOrder(map);
+        returnMap.put("rtnCode","1");
+        returnMap.put("rtnMsg","updateOrder更新任务成功");
+        return returnMap;
+    }
+
     /*
     * 接受任务
     * */
