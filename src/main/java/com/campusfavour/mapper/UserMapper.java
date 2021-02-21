@@ -18,6 +18,7 @@ public interface UserMapper {
     List<User> selectTaskCountRanking();
     //任务完成数当月榜单列表查询
     List<User> selectTaskCountMonthRanking();
+    //更新用户
     void updateUserById(Map map);
     //定时任务-每月刷新用户月任务完成数
     void countMonthTask();

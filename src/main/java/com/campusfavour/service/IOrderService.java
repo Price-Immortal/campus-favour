@@ -19,4 +19,7 @@ public interface IOrderService {
     Map usersOrders(Map map);
     //完成任务
     Map completeOrder(Map map);
+    //取消任务
+    Map cancelOrder(Map map);
+
 }

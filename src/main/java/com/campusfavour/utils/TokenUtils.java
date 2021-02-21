@@ -26,8 +26,9 @@ public class TokenUtils {
     public static String createJwtToken(String userName) {
         String issuer = "www.sungp.com";
         String subject = "1521936925@qq.com";
-        //过期时间一个小时
-        long ttlMillis = 3600000;
+        //过期时间一个小时3600000
+        //一天
+        long ttlMillis = 86400000;
         return createJwtToken(userName, issuer, subject, ttlMillis);
     }
  

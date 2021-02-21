@@ -7,6 +7,7 @@ import com.campusfavour.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /*
@@ -74,15 +75,27 @@ public class OrderController extends CommonController{
         return  orderService.acceptOrder(map);
     }
 
+     /*
+     * 取消任务
+     * */
+    @LoginRequired
+    @PostMapping("/cancelOrderFromReceive")
+    @ResponseBody
+    public Map cancelOrderReceive(@RequestBody Map map,@CurrentUser User user){
+        map.put("userId",user.getUserId());
+        return orderService.cancelOrder(map);
+    }
+
     /*
     * 我的发单
     * */
     @LoginRequired
     @PostMapping("/userRelease")
     @ResponseBody
-    public Map userRelease(@RequestBody Map map,@CurrentUser User user){
-        map.put("releaseUserName",user.getUserName());
-        return orderService.usersOrders(map);
+    public Map userRelease(@CurrentUser User user){
+        Map paramMap = new HashMap();
+        paramMap.put("releaseUserId",user.getUserId());
+        return orderService.usersOrders(paramMap);
     }
 
     /*
@@ -91,9 +104,10 @@ public class OrderController extends CommonController{
     @LoginRequired
     @PostMapping("/userReceive")
     @ResponseBody
-    public Map userReceive(@RequestBody Map map,@CurrentUser User user){
-        map.put("receiveUserName",user.getUserName());
-        return orderService.usersOrders(map);
+    public Map userReceive(@CurrentUser User user){
+        Map paramMap = new HashMap();
+        paramMap.put("receiveUserId",user.getUserId());
+        return orderService.usersOrders(paramMap);
     }
 
     /*

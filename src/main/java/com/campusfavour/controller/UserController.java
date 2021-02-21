@@ -23,7 +23,7 @@ public class UserController extends CommonController{
     /*
      * 总任务排行榜
      * */
-    @GetMapping("/selectTaskCountRanking")
+    @PostMapping("/selectTaskCountRanking")
     @ResponseBody
     public Map selectTaskCountRanking(){
         return userService.selectTaskCountRanking();
@@ -33,7 +33,7 @@ public class UserController extends CommonController{
     * 当月任务排行榜
     * */
     @LoginRequired
-    @GetMapping("/selectTaskCountMonthRanking")
+    @PostMapping("/selectTaskCountMonthRanking")
     @ResponseBody
     public Map selectTaskCountMonthRanking(){
         return userService.selectTaskCountMonthRanking();

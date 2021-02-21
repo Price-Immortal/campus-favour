@@ -29,6 +29,8 @@ public class Order {
     String startPlace;
     //任务目的地
     String endPlace;
+    //约定时间
+    String appointmentTime;
     //任务详情 带什么饭/快递名称/跑腿物品
     String detail;
 
@@ -126,5 +128,13 @@ public class Order {
 
     public void setReceiveTime(Date receiveTime) {
         this.receiveTime = receiveTime;
+    }
+
+    public String getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(String appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 }

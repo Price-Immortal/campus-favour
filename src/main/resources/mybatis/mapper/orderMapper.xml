@@ -15,6 +15,7 @@
         orderType,
         startPlace,
         endPlace,
+        appointmentTime,
         detail
     </sql>
     <sql id="releaseOrder">
@@ -25,6 +26,7 @@
         orderType,
         startPlace,
         endPlace,
+        appointmentTime,
         detail
     </sql>
 
@@ -69,6 +71,7 @@
        #{orderType},
        #{startPlace},
        #{endPlace},
+       #{appointmentTime},
        #{detail}
         )
     </insert>
@@ -84,6 +87,9 @@
             </if>
             <if test="endPlace!=null and endPlace!=''">
                 endPlace=#{endPlace},
+            </if>
+            <if test="appointmentTime!=null and appointmentTime!=''">
+                appointmentTime=#{appointmentTime},
             </if>
             <if test="detail!=null and detail!=''">
                 detail=#{detail},
@@ -107,7 +113,7 @@
         <include refid="fields"></include>
         from `order`
         <where>
-            <if test="id != null and id != ''">
+            <if test="orderId != null and orderId != ''">
                 AND orderId = #{orderId}
             </if>
             <if test="taskStatus != null and taskStatus != ''">
