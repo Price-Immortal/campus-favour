@@ -23,28 +23,9 @@ public class LoginController extends CommonController {
     @Autowired
     ILoginService iLoginService;
 
-    /*@GetMapping("/setCookie")
-    @ResponseBody
-    public String setCookie(HttpServletResponse response){
-        Cookie cookie = new Cookie("test","same");
-        cookie.setPath("/");
-        response.addCookie(cookie);
-        return "success";
-    }
-
-    @GetMapping("/getCookie")
-    @ResponseBody
-    public String getCookie(HttpServletRequest request, HttpServletResponse response){
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length >0) {
-            for (Cookie cookie : cookies) {
-                System.out.println("name:" + cookie.getName() + "-----value:" + cookie.getValue());
-            }
-        }
-        return "success";
-    }*/
-
-
+    /*
+    * 登录
+    * */
     @RequestMapping(value = "/login")
     @ResponseBody
     public Map token(String userName, String password) {
@@ -79,11 +60,9 @@ public class LoginController extends CommonController {
                 resultMap.put("rtnCode","1");
                 resultMap.put("rtnMsg","登陆成功");
                 resultMap.put("token",accessToken);
-
-                // 当前登录用户@CurrentUser
-//                request.getSession().setAttribute(CurrentUserConstants.CURRENT_USER, result);
                 return resultMap;
             }
         }
     }
+
 }
